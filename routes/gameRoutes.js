@@ -15,4 +15,15 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
+// Get all games
+router.get('/', protect, async (req, res) => {
+  try {
+    const games = await Game.find(); // Fetch all games from the database
+    res.status(200).json(games);
+  } catch (err) {
+    console.error('Error fetching games:', err.message);
+    res.status(500).json({ error: 'Failed to fetch games' });
+  }
+});
+
 module.exports = router;
